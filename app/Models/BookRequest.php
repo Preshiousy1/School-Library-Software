@@ -21,4 +21,9 @@ class BookRequest extends Model
     {
         return $this->belongsTo(Book::class);
     }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'user_id', 'id');
+    }
 }
