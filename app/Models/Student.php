@@ -17,11 +17,14 @@ class Student extends User
 
     public function pending_requests()
     {
-        return BookRequest::where('user_id', $this->id)->where('is_returned', '!=', true)->where('is_accepted', '!=', true)->where('is_pending', '=', true)->get();
+        // return $this->book_requests();
+        // ->where('is_returned', '!=', true)->where('is_accepted', '!=', true)->where('is_pending', '=', true)->get();
+
+        return $this->book_requests()->where('book_requests.is_pending', 1)->where('book_requests.is_returned', null)->where('book_requests.is_accepted', null);
     }
 
-    public function accepted_requests()
+    public function accepted_requests() //borrowed_book
     {
-        return $this->book_requests()->where('is_returned', '!=', true)->where('is_accepted', true)->get();
+        return $this->book_requests()->where('book_requests.is_returned', null)->where('book_requests.is_accepted', true);
     }
 }

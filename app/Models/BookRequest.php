@@ -16,4 +16,9 @@ class BookRequest extends Model
         'is_accepted',
         'is_returned',
     ];
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

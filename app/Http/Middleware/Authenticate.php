@@ -11,6 +11,9 @@ class Authenticate extends Middleware
 
     public function handle($request, Closure $next, $type, $type2 = null, $type3 = null)
     {
+        if (auth('student')->check() && auth('student')->user()->is_suspended) {
+            return response()->json(['error' => 'Your Account Has been Suspended, Contact Admin.'], 401);
+        }
         if ($type2 && $type3) {
             if (auth($type)->check() || auth($type2)->check() || auth($type3)->check()) {
                 return $next($request);

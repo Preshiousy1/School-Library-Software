@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\BookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -37,6 +38,9 @@ class StudentController extends Controller
         }
         if (!$token = auth('student')->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        if (auth('student')->attempt($validator->validated()) && auth('student')->user()->is_suspended) {
+            return response()->json(['error' => 'Your Account Has been Suspended, Contact Admin.'], 401);
         }
 
         // dd($token);
@@ -127,7 +131,7 @@ class StudentController extends Controller
         $student = auth('student')->user();
         $book = Book::find($book_id);
 
-        return $student->pending_requests;
+        // return $student->pending_requests;
 
         if (!$book) {
             return response()->json([
@@ -152,6 +156,8 @@ class StudentController extends Controller
             return response()->json([
                 'status' => 0,
                 'output' => 'You have a pending borrow request, you cannot request for more books.',
+                'book' => $student->pending_requests
+
             ]);
         }
         $book_request = $student->book_requests()->create([
@@ -161,6 +167,70 @@ class StudentController extends Controller
         return response()->json([
             'status' => 1,
             'output' => 'Book request successful',
+            'request' => $book_request
+        ]);
+    }
+
+    /**
+     * get all student's borrowed books, should be just one though.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getBorrowedBooks()
+    {
+
+        $student = auth('student')->user();
+        return response()->json($student->accepted_requests);
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function returnBook($request_id)
+    {
+
+        $student = auth('student')->user();
+        $book_request = BookRequest::find($request_id);
+
+        // return $student->pending_requests;
+
+        if (!$book_request) {
+            return response()->json([
+                'status' => 0,
+                'output' => 'This book request does not exist',
+            ]);
+        }
+        if ($book_request->user_id != $student->id) {
+            return response()->json([
+                'status' => 0,
+                'output' => 'You did not borrow this book, therefore cannot return it',
+            ]);
+        }
+        if ($book_request->is_returned == true) {
+            return response()->json([
+                'status' => 0,
+                'output' => 'This book request has already been processed',
+            ]);
+        }
+
+        if (!$book_request->is_accepted) {
+            return response()->json([
+                'status' => 0,
+                'output' => 'This book request was rejected',
+            ]);
+        }
+
+        $book_request->is_returned = true;
+        $book_request->book()->update(['is_borrowed' => false]);
+        $book_request->save();
+
+        return response()->json([
+            'status' => 1,
+            'output' => 'Book returned successfully',
             'request' => $book_request
         ]);
     }

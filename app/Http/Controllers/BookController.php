@@ -25,7 +25,7 @@ class BookController extends Controller
     public function getAvailableBooks()
     {
 
-        return response()->json(Book::where('is_available', true)->get());
+        return response()->json(Book::where('is_available', true)->where('is_borrowed', false)->get());
     }
 
     /**
@@ -35,7 +35,7 @@ class BookController extends Controller
      */
     public function searchBooksByCategory($category)
     {
-        return response()->json(Book::where('category', 'like', "%{$category}%")->where('is_available', true)->get());
+        return response()->json(Book::where('category', 'like', "%{$category}%")->where('is_available', true)->where('is_borrowed', false)->get());
     }
 
     /**
@@ -45,7 +45,7 @@ class BookController extends Controller
      */
     public function searchBooksByAuthor($author)
     {
-        return response()->json(Book::where('author', 'like', "%{$author}%")->where('is_available', true)->get());
+        return response()->json(Book::where('author', 'like', "%{$author}%")->where('is_available', true)->where('is_borrowed', false)->get());
     }
 
     /**
@@ -55,28 +55,28 @@ class BookController extends Controller
      */
     public function searchBooksByYear($year)
     {
-        return response()->json(Book::where('year', 'like', "%{$year}%")->where('is_available', true)->get());
+        return response()->json(Book::where('year', 'like', "%{$year}%")->where('is_available', true)->where('is_borrowed', false)->get());
     }
 
     /**
-     * Search by name.
+     * Search by all params.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function searchBooks(Request $request)
     {
         if ($request->has('name')) {
-            return response()->json(Book::where('name', 'like', "%{$request['name']}%")->where('is_available', true)->get());
+            return response()->json(Book::where('name', 'like', "%{$request['name']}%")->where('is_available', true)->where('is_borrowed', false)->get());
         }
         if ($request->has('author')) {
-            return response()->json(Book::where('author', 'like', "%{$request['author']}%")->where('is_available', true)->get());
+            return response()->json(Book::where('author', 'like', "%{$request['author']}%")->where('is_available', true)->where('is_borrowed', false)->get());
         }
         if ($request->has('year')) {
-            return response()->json(Book::where('year_published', 'like', "%{$request['year']}%")->where('is_available', true)->get());
+            return response()->json(Book::where('year_published', 'like', "%{$request['year']}%")->where('is_available', true)->where('is_borrowed', false)->get());
         }
         if ($request->has('category')) {
-            return response()->json(Book::where('category', 'like', "%{$request['category']}%")->where('is_available', true)->get());
+            return response()->json(Book::where('category', 'like', "%{$request['category']}%")->where('is_available', true)->where('is_borrowed', false)->get());
         }
-        return response()->json(Book::where('is_available', true)->get());
+        return response()->json(Book::where('is_available', true)->where('is_borrowed', false)->get());
     }
 }
