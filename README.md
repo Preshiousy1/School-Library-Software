@@ -4,12 +4,13 @@ School Library Software for 23IT
 
 You need to have Docker and Docker Compose installed on your server to proceed using this PHP environment.
 
-This is a PHP development environment used to run Laravel applications. The following four separate service containers will be used:
+This is a PHP development environment used to run Laravel applications. The following five separate service containers will be used:
 
 -   An `app` service running PHP7.4-FPM.
 -   A `db` service running MySQL 5.7.
 -   A `phpmyadmin` service for viewing `db` tables
 -   An `nginx` service that uses the `app` service to parse PHP code before serving the Laravel application to the final user.
+-   A `cron` service running PHP7.4-fpm-alpine that handles the backgroud processes.
 
 ## Running the application
 
