@@ -1,0 +1,1071 @@
+{
+	"info": {
+		"_postman_id": "143d81ae-c9ec-4f32-b2ad-4d449a25ee4b",
+		"name": "Library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16854697"
+	},
+	"item": [
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "Student Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_atam",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/student/register",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_atam",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/student/login",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Get Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/student/profile",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Get Books",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/student/books",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Get Borrowed Books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{root_address}}/student/books/borrowed",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"books",
+								"borrowed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Search Books By...",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/student/books/search",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"books",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Book 1",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "author 1",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2000",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "luxury",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Request Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/student/books/:book_id/request",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"books",
+								":book_id",
+								"request"
+							],
+							"variable": [
+								{
+									"key": "book_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Return Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{root_address}}/student/books/:request_id/return",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"student",
+								"books",
+								":request_id",
+								"return"
+							],
+							"variable": [
+								{
+									"key": "request_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin Create Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_admin3",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/createAdmin",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"createAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Create Manager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_manager3",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/createManager",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"createManager"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Create Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_manager3",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/createManager",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"createManager"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Delete Manager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/deleteManager/:manager_id",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"deleteManager",
+								":manager_id"
+							],
+							"variable": [
+								{
+									"key": "manager_id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/login",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/refresh",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Get Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_atam",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/profile",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Get Managers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/managers",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"managers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Get Students",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/admin/students",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"admin",
+								"students"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "Manager Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_manager",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/login",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Get Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "precious_atam",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/profile",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Get/Search Books By",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/books?available=0",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"books"
+							],
+							"query": [
+								{
+									"key": "available",
+									"value": "0",
+									"description": "boolean (1 or 0)"
+								},
+								{
+									"key": "borrowed",
+									"value": "1",
+									"description": "boolean (1 or 0)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Get/Search Students By Suspended",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/students",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"students"
+							],
+							"query": [
+								{
+									"key": "suspended",
+									"value": "1",
+									"description": "boolean (1 or 0)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Get BookRequests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/book_requests",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"book_requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Set Book Availability",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "available",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/books/setAvailable/:book_id",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"books",
+								"setAvailable",
+								":book_id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "book_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Set BookRequest Approval",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "approved",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/book_requests/setApproval/:request_id",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"book_requests",
+								"setApproval",
+								":request_id"
+							],
+							"variable": [
+								{
+									"key": "request_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager Set Student Suspend Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{manager_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "suspended",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{root_address}}/manager/students/setSuspend/:student_id",
+							"host": [
+								"{{root_address}}"
+							],
+							"path": [
+								"manager",
+								"students",
+								"setSuspend",
+								":student_id"
+							],
+							"variable": [
+								{
+									"key": "student_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "student_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9zdHVkZW50XC9sb2dpbiIsImlhdCI6MTY1NDY5Mjc5NiwiZXhwIjoxNjU0Njk2Mzk2LCJuYmYiOjE2NTQ2OTI3OTYsImp0aSI6IkgwbUJJOVU5WmJDWHpDRGYiLCJzdWIiOjEsInBydiI6IjljNDI5ZTZhNjBjZDUyODU0NzNmMmM4YmM3MDFlYzA5NDhkZjRkOGMifQ.MAU1wXH0N9RJ7mlrqF4lA6FI_TEDpNhDSWvc1PTSzL4"
+		},
+		{
+			"key": "admin_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hZG1pblwvbG9naW4iLCJpYXQiOjE2NTQ2OTA1NzIsImV4cCI6MTY1NDY5NDE3MiwibmJmIjoxNjU0NjkwNTcyLCJqdGkiOiJNTkhvc0JXSVZwbU9waDR6Iiwic3ViIjo4LCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.GCGFyYuwghTB3dhPrYjIoaY0PNoXJdXfX9VxMy9UYA8"
+		},
+		{
+			"key": "manager_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9tYW5hZ2VyXC9sb2dpbiIsImlhdCI6MTY1NDYwMzgzOCwiZXhwIjoxNjU0NjA3NDM4LCJuYmYiOjE2NTQ2MDM4MzgsImp0aSI6IldhUmlrTE54WDYwVGFBa0oiLCJzdWIiOjYsInBydiI6IjZlNjg5NjIyNTRkNmRmNDAxZDAzYjMwYTM5ZTE2MjM2NGUxNjQ2Y2QifQ.hywjDQOiB0tQ68HxO1M81EzuqnGcwqKLIO61CByu30k"
+		},
+		{
+			"key": "root_address",
+			"value": "http://127.0.0.1:8000/api"
+		}
+	]
+}

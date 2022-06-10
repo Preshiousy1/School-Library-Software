@@ -80,11 +80,7 @@ password = (empty)
 
 ## Using the application
 
--   You can test all routes using the following postman collection
-
-```bash
-https://app.getpostman.com/join-team?invite_code=99fd8b237c2bcab62d96faeffeefe9e4&target_code=d28198effdd825131c9763681033e6d7
-```
+-   You can test all routes using the following postman collection: `. Library.postman_collection.json` it in the application's root director. Just import it into your postman desktop app to start running endpoints.
 
 -   The root url is an environment variable that is currently `http://127.0.0.1:8000/api` you can chane it to suite your server ip address
 -   the values for the following env variables can be changed as well in the .env file. This variables determine the time used in the background processes in `hours`
