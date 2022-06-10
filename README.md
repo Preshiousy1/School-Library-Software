@@ -2,22 +2,76 @@
 
 School Library Software for 23IT
 
-Installation Steps
+You need to have Docker and Docker Compose installed on your server to proceed using this PHP environment.
 
-1. Run git clone https://github.com/Preshiousy1/School-Library-Software.git
+This is a PHP development environment used to run Laravel applications. The following four separate service containers will be used:
 
-# cd into the project
+-   An `app` service running PHP7.4-FPM.
+-   A `db` service running MySQL 5.7.
+-   A `phpmyadmin` service for viewing `db` tables
+-   An `nginx` service that uses the `app` service to parse PHP code before serving the Laravel application to the final user.
 
-2. Run cp .env.example .env
-3. Run docker-compose up -d --build
+## Running the application
 
-4. Run docker-compose exec app php artisan migrate
+-   To get started, pull this repo into a root directory
+
+```bash
+git clone https://github.com/Preshiousy1/School-Library-Software.git
+```
+
+-   cd into the project
+
+```bash
+cd School-Library-Software
+```
+
+-   Copy the env file
+
+```bash
+ cp .env.example .env
+```
+
+-   Build and start docker-compose
+
+```bash
+docker-compose up -d --build
+```
+
+-   install all composer dependencies
+
+```bash
+docker-compose exec app composer install
+```
+
+-   clear cache
+
+```bash
+docker-compose exec app php artisan optimize
+```
+
+-   migrate the database
+
+```bash
+docker-compose exec app php artisan migrate
+```
 
 # set up your own superadmin username and password at .env file
 
 ADMIN_USERNAME= admin(default)
 ADMIN_PASSWORD= password(default)
 
-7. Run docker-compose exec app php artisan db:seed
-8. Run php artisan serve
-9. Go to link localhost:8000
+-   run the database seeder to automatically create super admin
+
+```bash
+docker-compose exec app php artisan db:seed
+```
+
+-   Now go to your browser and access your server’s domain name or IP address on port `8000`: `http://server_domain_or_IP:8000`. In case you are running this demo on your local machine, use `http://localhost:8000` to access the application from your browser.
+
+-   You can watch the database with phpmyadmin at `http://localhost:8081` with login details:
+
+```bash
+server = db
+username = root
+password = (empty)
+```
