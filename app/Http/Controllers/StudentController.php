@@ -131,20 +131,23 @@ class StudentController extends Controller
         $student = auth('student')->user();
         $book = Book::find($book_id);
 
-        // return $student->pending_requests;
-
+        // if book does not exist exit
         if (!$book) {
             return response()->json([
                 'status' => 0,
                 'output' => 'This book does not exist',
             ]);
         }
+
+        // if book is borrowed or was set to unavailable exit
         if (!$book->is_available || $book->is_borrowed) {
             return response()->json([
                 'status' => 0,
                 'output' => 'This book is not available for borrowing',
             ]);
         }
+
+        // if this student has not returned a borrowed book they cannot request
         if (count($student->accepted_requests) > 0) {
             return response()->json([
                 'status' => 0,
@@ -152,6 +155,8 @@ class StudentController extends Controller
                 'book' => $student->accepted_requests
             ]);
         }
+
+        // if this student has another pending book request then they cannot request another book
         if (count($student->pending_requests) > 0) {
             return response()->json([
                 'status' => 0,
@@ -196,20 +201,23 @@ class StudentController extends Controller
         $student = auth('student')->user();
         $book_request = BookRequest::find($request_id);
 
-        // return $student->pending_requests;
 
+        // if this is not a book_request exit
         if (!$book_request) {
             return response()->json([
                 'status' => 0,
                 'output' => 'This book request does not exist',
             ]);
         }
+        // if the student didnt borrow this book exit
         if ($book_request->user_id != $student->id) {
             return response()->json([
                 'status' => 0,
                 'output' => 'You did not borrow this book, therefore cannot return it',
             ]);
         }
+
+        // if this book has already been reurned no need
         if ($book_request->is_returned == true) {
             return response()->json([
                 'status' => 0,
@@ -217,6 +225,7 @@ class StudentController extends Controller
             ]);
         }
 
+        // if this book request was never accepted it cannot be returned
         if (!$book_request->is_accepted) {
             return response()->json([
                 'status' => 0,

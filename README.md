@@ -55,10 +55,12 @@ docker-compose exec app php artisan optimize
 docker-compose exec app php artisan migrate
 ```
 
-# set up your own superadmin username and password at .env file
+### set up your own superadmin username and password at .env file
 
+```bash
 ADMIN_USERNAME= admin(default)
 ADMIN_PASSWORD= password(default)
+```
 
 -   run the database seeder to automatically create super admin
 
@@ -68,10 +70,26 @@ docker-compose exec app php artisan db:seed
 
 -   Now go to your browser and access your server’s domain name or IP address on port `8000`: `http://server_domain_or_IP:8000`. In case you are running this demo on your local machine, use `http://localhost:8000` to access the application from your browser.
 
--   You can watch the database with phpmyadmin at `http://localhost:8081` with login details:
+-   You can watch the database with `phpmyadmin` at `http://localhost:8081` with login details:
 
 ```bash
 server = db
 username = root
 password = (empty)
+```
+
+## Using the application
+
+-   You can test all routes using the following postman collection
+
+```bash
+https://app.getpostman.com/join-team?invite_code=99fd8b237c2bcab62d96faeffeefe9e4&target_code=d28198effdd825131c9763681033e6d7
+```
+
+-   The root url is an environment variable that is currently `http://127.0.0.1:8000/api` you can chane it to suite your server ip address
+-   the values for the following env variables can be changed as well in the .env file. This variables determine the time used in the background processes in `hours`
+
+```bash
+CLOSE_BORROW_REQUESTS=24
+SUSPEND_BORROW_USERS=72
 ```

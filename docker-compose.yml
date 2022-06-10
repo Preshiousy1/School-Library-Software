@@ -14,9 +14,10 @@ services:
     volumes:
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-      - dbdata:/var/lib/mysql
     depends_on:
+      - nginx
       - db
+      - phpmyadmin
     networks:
       - app-network
 
@@ -32,6 +33,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
+      - mysql:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/my.cnf
       - ./mysql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     networks:
@@ -65,9 +67,20 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
-      
+
+  cron:
+      build:
+        context: .
+        dockerfile: cron.dockerfile
+      container_name: cron
+      volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      networks:
+        - app-network
+
 volumes:
-  dbdata:
+  mysql:
 networks:
   app-network:
     driver: bridge

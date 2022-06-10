@@ -144,6 +144,7 @@ class ManagerController extends Controller
     public function setBookRequestApproval(Request $request, $request_id)
     {
 
+        // check that the request was sent with an approval value
         $validator = Validator::make($request->all(), [
             'approved' => 'required|boolean',
         ]);
@@ -151,13 +152,15 @@ class ManagerController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
         $book_request = BookRequest::find($request_id);
+
+        // if the book is not in database exit
         if (!$book_request) {
             return response()->json([
                 'status' => 0,
                 'output' => "This book request does not exist in library",
             ]);
         }
-
+        // if action has already been taken on this book request exit
         if ($book_request->is_accepted != null || !$book_request->is_pending) {
             return response()->json([
                 'status' => 0,
@@ -214,6 +217,7 @@ class ManagerController extends Controller
     public function setStudentSuspendStatus(Request $request, $student_id)
     {
 
+        // check that suspended status was sent
         $validator = Validator::make($request->all(), [
             'suspended' => 'required|boolean',
         ]);
@@ -222,6 +226,8 @@ class ManagerController extends Controller
         }
 
         $student = Student::find($student_id);
+
+        // is this is not a student exit
         if (!$student) {
             return response()->json([
                 'status' => 0,
@@ -261,6 +267,7 @@ class ManagerController extends Controller
      */
     public function setBookAvailability(Request $request, $book_id)
     {
+        // check that availablity value was sent
         $validator = Validator::make($request->all(), [
             'available' => 'required|boolean',
         ]);
@@ -268,6 +275,8 @@ class ManagerController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
         $book = Book::find($book_id);
+
+        // if book does not exist in database exit
         if (!$book) {
             return response()->json([
                 'status' => 0,
@@ -275,12 +284,15 @@ class ManagerController extends Controller
             ]);
         }
 
+        // you cannot make a borrowed book unavailable
         if (count($book->accepted_requests) > 0 || $book->is_borrowed) {
             return response()->json([
                 'status' => 0,
                 'output' => 'This book is currently borrowed.',
             ]);
         }
+
+        // you cannot make a book with untreated requests unavailable
         if (count($book->pending_requests) > 0) {
             return response()->json([
                 'status' => 0,
